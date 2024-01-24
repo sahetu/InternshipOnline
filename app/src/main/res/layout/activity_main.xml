@@ -7,62 +7,68 @@
     android:background="@color/dark_blue"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/main_image"
-        android:src="@drawable/bg_image"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"/>
-
     <TextView
-        android:id="@+id/main_title"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textSize="25dp"
-        android:layout_below="@id/main_image"
+        style="@style/text_bold_20"
+        android:id="@+id/main_create_account"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:text="Login to\nyour Account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="@dimen/_20sdp"
+        android:padding="@dimen/_5sdp"
+        android:text="Create an Account" />
 
-    <EditText
-        android:textSize="15dp"
-        android:id="@+id/main_username"
-        android:padding="10dp"
-        android:background="@drawable/custom_border"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:hint="Username or email"
-        android:layout_marginTop="50dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_below="@id/main_title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/main_create_account">
 
-    <EditText
-        android:textSize="15dp"
-        android:id="@+id/main_password"
-        android:padding="10dp"
-        android:background="@drawable/custom_border"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:hint="Password"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_below="@id/main_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/main_login"
-        android:text="Log in"
-        app:backgroundTint="@null"
-        android:background="@drawable/custom_button"
-        android:layout_marginTop="30dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_below="@id/main_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/main_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:src="@drawable/bg_image" />
+
+            <TextView
+                style="@style/text_bold_20"
+                android:id="@+id/main_title"
+                android:layout_below="@id/main_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Login to\nyour Account" />
+
+            <RelativeLayout
+                android:layout_marginHorizontal="@dimen/_30sdp"
+                android:layout_below="@id/main_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    style="@style/edit_15"
+                    android:id="@+id/main_username"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:hint="Username or email" />
+
+                <EditText
+                    style="@style/edit_15"
+                    android:id="@+id/main_password"
+                    android:layout_below="@id/main_username"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:hint="Password" />
+
+                <Button
+                    style="@style/button_16"
+                    android:id="@+id/main_login"
+                    android:layout_below="@id/main_password"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:text="Log in" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
