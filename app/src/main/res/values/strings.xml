@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">InternshipOnline</string>
+    <string name="create_account">Create an Account</string>
+    <string name="login_account">Login to\nyour Account</string>
+    <string name="user_email">Username or email</string>
+    <string name="password">Password</string>
+    <string name="login">Log in</string>
 </resources>

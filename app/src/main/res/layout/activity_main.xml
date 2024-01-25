@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_20sdp"
         android:padding="@dimen/_5sdp"
-        android:text="Create an Account" />
+        android:text="@string/create_account" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_below="@id/main_image"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:text="Login to\nyour Account" />
+                android:text="@string/login_account" />
 
             <RelativeLayout
                 android:layout_marginHorizontal="@dimen/_30sdp"
@@ -46,24 +46,26 @@
                 android:layout_height="match_parent">
 
                 <EditText
+                    android:inputType="textEmailAddress"
                     style="@style/edit_15"
                     android:id="@+id/main_username"
                     android:layout_marginTop="@dimen/_40sdp"
-                    android:hint="Username or email" />
+                    android:hint="@string/user_email" />
 
                 <EditText
+                    android:inputType="textPassword"
                     style="@style/edit_15"
                     android:id="@+id/main_password"
                     android:layout_below="@id/main_username"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:hint="Password" />
+                    android:hint="@string/password" />
 
                 <Button
                     style="@style/button_16"
                     android:id="@+id/main_login"
                     android:layout_below="@id/main_password"
                     android:layout_marginTop="@dimen/_30sdp"
-                    android:text="Log in" />
+                    android:text="@string/login" />
 
             </RelativeLayout>
 
