@@ -5,4 +5,12 @@
     <string name="user_email">Username or email</string>
     <string name="password">Password</string>
     <string name="login">Log in</string>
+
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="email">Email Id</string>
+    <string name="contact">Contact No.</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">Signup</string>
+
 </resources>
