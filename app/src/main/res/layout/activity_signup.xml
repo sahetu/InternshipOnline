@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    style="@style/bg_style"
     tools:context=".MainActivity">
 
     <ScrollView
@@ -63,27 +64,39 @@
                 android:maxLength="12" />
 
             <RadioGroup
+                android:id="@+id/signup_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/signup_male"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/radio_15"
                     android:layout_weight="1"
-                    android:text="Male"
-                    android:textColor="@color/white" />
+                    android:text="Male" />
 
                 <RadioButton
                     android:id="@+id/signup_female"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/radio_15"
                     android:layout_weight="1"
-                    android:text="Female"
-                    android:textColor="@color/white" />
+                    android:text="Female" />
 
             </RadioGroup>
+
+            <Spinner
+                android:background="@drawable/custom_border"
+                android:popupBackground="@color/white"
+                android:id="@+id/spinner_city"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_10sdp" />
+
+            <CheckBox
+                android:layout_marginTop="@dimen/_10sdp"
+                style="@style/checkbox_15"
+                android:id="@+id/signup_checkbox"
+                android:text="Terms &amp; Conditions"/>
 
             <Button
                 android:id="@+id/signup_button"

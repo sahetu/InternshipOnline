@@ -4,10 +4,13 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:fontFamily">@font/gafata</item>
-        <item name="android:background">@color/dark_blue</item>
     </style>
 
     <style name="Theme.InternshipOnline" parent="Base.Theme.InternshipOnline" />
+
+    <style name="bg_style">
+        <item name="android:background">@color/dark_blue</item>
+    </style>
 
     <style name="text_18" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">wrap_content</item>
@@ -43,6 +46,27 @@
         <item name="backgroundTint">@null</item>
         <item name="android:textSize">@dimen/_16sdp</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="radio_15" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="buttonTint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_15sdp</item>
+    </style>
+
+    <style name="spinner_15" parent="Widget.AppCompat.Spinner">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_15sdp</item>
+    </style>
+
+    <style name="checkbox_15" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_15sdp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>

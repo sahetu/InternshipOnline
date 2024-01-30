@@ -3,6 +3,9 @@
     <style name="Base.Theme.InternshipOnline" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
+
+    <style name="bg_style">
         <item name="android:background">@color/light_blue</item>
     </style>
 
@@ -40,6 +43,19 @@
         <item name="backgroundTint">@null</item>
         <item name="android:textSize">@dimen/_16sdp</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="radio_15" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="buttonTint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_15sdp</item>
+    </style>
+
+    <style name="spinner_15" parent="Widget.AppCompat.Spinner">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_15sdp</item>
     </style>
 
 </resources>
