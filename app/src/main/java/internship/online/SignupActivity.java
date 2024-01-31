@@ -2,6 +2,7 @@ package internship.online;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -35,11 +36,16 @@ public class SignupActivity extends AppCompatActivity {
     ArrayList<String> cityArray;
 
     CheckBox checkBox;
+    SQLiteDatabase sqlDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        sqlDb = openOrCreateDatabase("InternshipOn.db",MODE_PRIVATE,null);
+        String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,USERNAME VARCHAR(50),NAME VARCHAR(50),EMAIL VARCHAR(50),CONTACT BIGINT(10),PASSWORD VARCHAR(12),GENDER VARCHAR(6),CITY VARCHAR(100))";
+        sqlDb.execSQL(tableQuery);
 
         username = findViewById(R.id.signup_username);
         name = findViewById(R.id.signup_name);
