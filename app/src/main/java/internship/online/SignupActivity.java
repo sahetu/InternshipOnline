@@ -2,6 +2,7 @@ package internship.online;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class SignupActivity extends AppCompatActivity {
 
     CheckBox checkBox;
     SQLiteDatabase sqlDb;
+    String sCity = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +80,11 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i==0){
-
+                    sCity = "";
                 }
                 else {
                     //new CommonMethod(SignupActivity.this, cityArray[i]);
+                    sCity = cityArray.get(i);
                     new CommonMethod(SignupActivity.this, cityArray.get(i));
                 }
             }
@@ -222,7 +225,17 @@ public class SignupActivity extends AppCompatActivity {
                     new CommonMethod(SignupActivity.this,"Please Accept Terms & Conditions");
                 }
                 else{
-                    new CommonMethod(SignupActivity.this,"Signup Successfully");
+                    String selectQuery = "SELECT * FROM USERS WHERE USERNAME='"+username.getText().toString()+"' OR EMAIL='"+email.getText().toString()+"' OR CONTACT='"+contact.getText().toString()+"'";
+                    Cursor cursor = sqlDb.rawQuery(selectQuery,null);
+                    if(cursor.getCount()>0){
+                        new CommonMethod(SignupActivity.this,"User Already Exists");
+                    }
+                    else{
+                        String insertQuery = "INSERT INTO USERS VALUES(NULL,'"+username.getText().toString()+"','"+name.getText().toString()+"','"+email.getText().toString()+"','"+contact.getText().toString()+"','"+password.getText().toString()+"','"+sGender+"','"+sCity+"')";
+                        sqlDb.execSQL(insertQuery);
+                        new CommonMethod(SignupActivity.this,"Signup Successfully");
+                        onBackPressed();
+                    }
                 }
             }
         });
