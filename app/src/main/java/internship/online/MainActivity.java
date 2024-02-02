@@ -1,6 +1,7 @@
 package internship.online;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,11 +22,14 @@ public class MainActivity extends AppCompatActivity {
     EditText email,password;
     TextView createAccount;
     SQLiteDatabase sqlDb;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sp = getSharedPreferences(ConstantSp.PREF,MODE_PRIVATE);
 
         sqlDb = openOrCreateDatabase("InternshipOn.db",MODE_PRIVATE,null);
         String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,USERNAME VARCHAR(50),NAME VARCHAR(50),EMAIL VARCHAR(50),CONTACT BIGINT(10),PASSWORD VARCHAR(12),GENDER VARCHAR(6),CITY VARCHAR(100))";
@@ -81,18 +85,26 @@ public class MainActivity extends AppCompatActivity {
 
                             Log.d("RESPONSE_USER",sUserId+"___"+sGender);
 
-                            Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                            sp.edit().putString(ConstantSp.ID,sUserId).commit();
+                            sp.edit().putString(ConstantSp.USERNAME,sUsername).commit();
+                            sp.edit().putString(ConstantSp.NAME,sName).commit();
+                            sp.edit().putString(ConstantSp.EMAIL,sEmail).commit();
+                            sp.edit().putString(ConstantSp.CONTACT,sContact).commit();
+                            sp.edit().putString(ConstantSp.PASSWORD,sPassword).commit();
+                            sp.edit().putString(ConstantSp.CITY,sCity).commit();
+                            sp.edit().putString(ConstantSp.GENDER,sGender).commit();
+
+                            /*Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
 
                             Bundle bundle = new Bundle();
                             bundle.putString("EMAIL", sEmail);
                             bundle.putString("PASSWORD", password.getText().toString());
 
                             intent.putExtras(bundle);
-                            startActivity(intent);
+                            startActivity(intent);*/
 
                         }
-
-                        //new CommonMethod(MainActivity.this, DashboardActivity.class);
+                        new CommonMethod(MainActivity.this, DashboardActivity.class);
                     }
                     else{
                         new CommonMethod(MainActivity.this,"Login Unsuccessfully");
