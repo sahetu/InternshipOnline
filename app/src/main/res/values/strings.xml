@@ -13,4 +13,10 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="signup">Signup</string>
 
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+
+    <string name="edit_profile">Edit Profile</string>
+    <string name="submit">Submit</string>
+
 </resources>

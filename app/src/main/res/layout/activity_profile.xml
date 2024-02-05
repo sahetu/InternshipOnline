@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    style="@style/bg_style"
+    tools:context=".ProfileActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_30sdp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/profile_username"
+                style="@style/edit_15"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:hint="@string/username"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/profile_name"
+                style="@style/edit_15"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:hint="@string/name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/profile_email"
+                style="@style/edit_15"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/profile_contact"
+                style="@style/edit_15"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:hint="@string/contact"
+                android:inputType="phone"
+                android:maxLength="10" />
+
+            <EditText
+                android:id="@+id/profile_password"
+                style="@style/edit_15"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:maxLength="12" />
+
+            <EditText
+                android:id="@+id/profile_confirm_password"
+                style="@style/edit_15"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:maxLength="12" />
+
+            <RadioGroup
+                android:id="@+id/profile_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/profile_male"
+                    style="@style/radio_15"
+                    android:layout_weight="1"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/profile_female"
+                    style="@style/radio_15"
+                    android:layout_weight="1"
+                    android:text="Female" />
+
+            </RadioGroup>
+
+            <Spinner
+                android:background="@drawable/custom_border"
+                android:popupBackground="@color/white"
+                android:id="@+id/profile_spinner_city"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_10sdp" />
+
+            <Button
+                android:id="@+id/profile_button"
+                style="@style/button_16"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:text="@string/edit_profile" />
+
+            <Button
+                android:id="@+id/profile_button_submit"
+                style="@style/button_16"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:text="@string/submit" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

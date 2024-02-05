@@ -26,4 +26,18 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/dashboard_profile"
+        android:text="@string/profile"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        style="@style/button_16"/>
+
+    <Button
+        android:id="@+id/dashboard_logout"
+        android:text="@string/logout"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        style="@style/button_16"/>
+
 </LinearLayout>
