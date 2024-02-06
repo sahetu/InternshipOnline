@@ -207,6 +207,15 @@ public class ProfileActivity extends AppCompatActivity {
                     String updateQuery = "UPDATE USERS SET USERNAME='"+username.getText().toString()+"',NAME='"+name.getText().toString()+"',EMAIL='"+email.getText().toString()+"',CONTACT='"+contact.getText().toString()+"',PASSWORD='"+password.getText().toString()+"',GENDER='"+sGender+"',CITY='"+sCity+"' WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"'";
                     sqlDb.execSQL(updateQuery);
                     new CommonMethod(ProfileActivity.this,"Profile Update Successfully");
+
+                    sp.edit().putString(ConstantSp.USERNAME,username.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.NAME,name.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.EMAIL,email.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.CONTACT,contact.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.PASSWORD,password.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.GENDER,sGender).commit();
+                    sp.edit().putString(ConstantSp.CITY,sCity).commit();
+
                     setData(false);
                 }
             }

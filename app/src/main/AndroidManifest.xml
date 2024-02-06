@@ -13,6 +13,9 @@
         android:theme="@style/Theme.InternshipOnline"
         tools:targetApi="31">
         <activity
+            android:name=".UserSimpleListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
@@ -41,7 +44,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -34,6 +34,20 @@
         style="@style/button_16"/>
 
     <Button
+        android:id="@+id/dashboard_delete_profile"
+        android:text="@string/delete_profile"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        style="@style/button_16"/>
+
+    <Button
+        android:id="@+id/dashboard_user_list"
+        android:text="@string/user_list"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        style="@style/button_16"/>
+
+    <Button
         android:id="@+id/dashboard_logout"
         android:text="@string/logout"
         android:layout_marginTop="@dimen/_20sdp"

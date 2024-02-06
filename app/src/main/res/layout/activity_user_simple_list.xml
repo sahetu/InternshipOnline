@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserSimpleListActivity">
+
+    <AutoCompleteTextView
+        android:hint="Search City"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:id="@+id/user_simple_auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <MultiAutoCompleteTextView
+        android:layout_below="@id/user_simple_auto"
+        android:hint="Search Multiple City"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:id="@+id/user_simple_multiauto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_below="@id/user_simple_multiauto"
+        android:id="@+id/user_simple_listview"
+        android:dividerHeight="@dimen/_1sdp"
+        android:divider="@color/light_blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!--<GridView
+        android:numColumns="auto_fit"
+        android:id="@+id/user_simple_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>-->
+
+</RelativeLayout>
