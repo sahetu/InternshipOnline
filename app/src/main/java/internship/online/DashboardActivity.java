@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class DashboardActivity extends AppCompatActivity {
 
     TextView name;
-    Button logout,profile,deleteProfile,userList;
+    Button logout,profile,deleteProfile,userList,userCustomList;
     SharedPreferences sp;
     SQLiteDatabase sqlDb;
 
@@ -93,6 +93,14 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new CommonMethod(DashboardActivity.this, UserSimpleListActivity.class);
+            }
+        });
+
+        userCustomList = findViewById(R.id.dashboard_custom_user_list);
+        userCustomList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this, UserCustomListActivity.class);
             }
         });
 

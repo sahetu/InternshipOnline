@@ -13,6 +13,9 @@
         android:theme="@style/Theme.InternshipOnline"
         tools:targetApi="31">
         <activity
+            android:name=".UserCustomListActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserSimpleListActivity"
             android:exported="false" />
         <activity

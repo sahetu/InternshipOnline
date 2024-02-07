@@ -16,6 +16,7 @@
     <string name="delete_profile">Delete Profile</string>
     <string name="profile">Profile</string>
     <string name="user_list">User Data With Listview</string>
+    <string name="user_custom_list">User Custom Listview</string>
     <string name="logout">Logout</string>
 
     <string name="edit_profile">Edit Profile</string>
