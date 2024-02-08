@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_200sdp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/dark_blue"
+    app:cardElevation="@dimen/_4sdp"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:layout_marginVertical="@dimen/_5sdp"
+    android:layout_marginHorizontal="@dimen/_10sdp">
+
+    <LinearLayout
+        android:padding="@dimen/_10sdp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/custom_card_recycler_name"
+                style="@style/text_bold_20" />
+
+            <TextView
+                android:id="@+id/custom_card_recycler_gender"
+                style="@style/text_18"
+                android:layout_marginLeft="@dimen/_5sdp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/custom_card_recycler_email"
+            style="@style/text_18"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:drawableLeft="@drawable/ic_email"
+            android:drawablePadding="@dimen/_5sdp" />
+
+        <TextView
+            android:id="@+id/custom_card_recycler_contact"
+            style="@style/text_18"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:drawableLeft="@drawable/ic_call"
+            android:drawablePadding="@dimen/_5sdp" />
+
+        <TextView
+            android:id="@+id/custom_card_recycler_city"
+            style="@style/text_18"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:drawableLeft="@drawable/ic_location"
+            android:drawablePadding="@dimen/_5sdp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

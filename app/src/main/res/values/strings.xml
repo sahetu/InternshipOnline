@@ -19,6 +19,8 @@
     <string name="user_custom_list">User Custom Listview</string>
     <string name="logout">Logout</string>
 
+    <string name="user_recycler">User Data With Recycler</string>
+
     <string name="edit_profile">Edit Profile</string>
     <string name="submit">Submit</string>
 

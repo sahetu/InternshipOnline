@@ -12,4 +12,13 @@ public class ConstantSp {
     public static final String GENDER = "gender";
     public static final String CITY = "city";
 
+
+    public static final String USER_DETAIL_ID = "ud_id";
+    public static final String USER_DETAIL_USERNAME = "ud_username";
+    public static final String USER_DETAIL_NAME = "ud_name";
+    public static final String USER_DETAIL_EMAIL = "ud_email";
+    public static final String USER_DETAIL_CONTACT = "ud_contact";
+    public static final String USER_DETAIL_GENDER = "ud_gender";
+    public static final String USER_DETAIL_CITY = "ud_city";
+
 }
