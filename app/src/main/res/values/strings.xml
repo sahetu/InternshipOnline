@@ -20,6 +20,7 @@
     <string name="logout">Logout</string>
 
     <string name="user_recycler">User Data With Recycler</string>
+    <string name="amazon_category">Amazone Category</string>
 
     <string name="edit_profile">Edit Profile</string>
     <string name="submit">Submit</string>
