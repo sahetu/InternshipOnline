@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class DashboardActivity extends AppCompatActivity {
 
     TextView name;
-    Button logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler;
+    Button logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler,activityFragment,tabDemo;
     SharedPreferences sp;
     SQLiteDatabase sqlDb;
 
@@ -117,6 +117,22 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new CommonMethod(DashboardActivity.this, AmazonCategoryActivity.class);
+            }
+        });
+
+        activityFragment = findViewById(R.id.dashboard_activity_fragment);
+        activityFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this,ActivityToFragmentActivity.class);
+            }
+        });
+
+        tabDemo = findViewById(R.id.dashboard_tab);
+        tabDemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this,TabDemoActivity.class);
             }
         });
 

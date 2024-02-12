@@ -69,6 +69,20 @@
         style="@style/button_16"/>
 
     <Button
+        android:id="@+id/dashboard_activity_fragment"
+        android:text="@string/activity_fragment"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        style="@style/button_16"/>
+
+    <Button
+        android:id="@+id/dashboard_tab"
+        android:text="@string/tab_demo"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        style="@style/button_16"/>
+
+    <Button
         android:id="@+id/dashboard_logout"
         android:text="@string/logout"
         android:layout_marginTop="@dimen/_20sdp"
