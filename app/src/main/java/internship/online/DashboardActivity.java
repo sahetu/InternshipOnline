@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class DashboardActivity extends AppCompatActivity {
 
     TextView name;
-    Button logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler,activityFragment,tabDemo;
+    Button logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler,activityFragment,tabDemo,navigationDrawer,bottomNav,currentLocation;
     SharedPreferences sp;
     SQLiteDatabase sqlDb;
 
@@ -133,6 +133,30 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new CommonMethod(DashboardActivity.this,TabDemoActivity.class);
+            }
+        });
+
+        navigationDrawer = findViewById(R.id.dashboard_nav);
+        navigationDrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this, NavDemoActivity.class);
+            }
+        });
+
+        bottomNav = findViewById(R.id.dashboard_bottom_nav);
+        bottomNav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this, BottomNavActivity.class);
+            }
+        });
+
+        currentLocation = findViewById(R.id.dashboard_google_map);
+        currentLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this,MapsActivity.class);
             }
         });
 

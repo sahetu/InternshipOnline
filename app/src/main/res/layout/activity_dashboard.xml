@@ -2,91 +2,123 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/bg_style"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/bg_style"
     android:orientation="vertical"
     tools:context=".DashboardActivity">
 
     <LinearLayout
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_gravity="center"
-        android:gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="center">
 
         <TextView
-            android:text="Welcome"
-            style="@style/text_18"/>
+            style="@style/text_18"
+            android:text="Welcome" />
 
         <TextView
             android:id="@+id/dashboard_name"
-            android:layout_marginLeft="@dimen/_2sdp"
-            style="@style/text_bold_20"/>
+            style="@style/text_bold_20"
+            android:layout_marginLeft="@dimen/_2sdp" />
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/dashboard_profile"
-        android:text="@string/profile"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_16"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/dashboard_delete_profile"
-        android:text="@string/delete_profile"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_16"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/dashboard_user_list"
-        android:text="@string/user_list"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_16"/>
+            <Button
+                android:id="@+id/dashboard_profile"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/profile" />
 
-    <Button
-        android:id="@+id/dashboard_custom_user_list"
-        android:text="@string/user_custom_list"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_16"/>
+            <Button
+                android:id="@+id/dashboard_delete_profile"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/delete_profile" />
 
-    <Button
-        android:id="@+id/dashboard_user_recycler"
-        android:text="@string/user_recycler"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_16"/>
+            <Button
+                android:id="@+id/dashboard_user_list"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/user_list" />
 
-    <Button
-        android:id="@+id/dashboard_amazon_category"
-        android:text="@string/amazon_category"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_16"/>
+            <Button
+                android:id="@+id/dashboard_custom_user_list"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/user_custom_list" />
 
-    <Button
-        android:id="@+id/dashboard_activity_fragment"
-        android:text="@string/activity_fragment"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_16"/>
+            <Button
+                android:id="@+id/dashboard_user_recycler"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/user_recycler" />
 
-    <Button
-        android:id="@+id/dashboard_tab"
-        android:text="@string/tab_demo"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_16"/>
+            <Button
+                android:id="@+id/dashboard_amazon_category"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/amazon_category" />
 
-    <Button
-        android:id="@+id/dashboard_logout"
-        android:text="@string/logout"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        style="@style/button_16"/>
+            <Button
+                android:id="@+id/dashboard_activity_fragment"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/activity_fragment" />
 
+            <Button
+                android:id="@+id/dashboard_tab"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/tab_demo" />
+
+            <Button
+                android:id="@+id/dashboard_nav"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/navigation_drawer" />
+
+            <Button
+                android:id="@+id/dashboard_bottom_nav"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/bottom_nav" />
+
+            <Button
+                android:id="@+id/dashboard_google_map"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/current_location" />
+
+            <Button
+                android:id="@+id/dashboard_logout"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/logout" />
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
