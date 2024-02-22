@@ -2,6 +2,8 @@ package internship.online;
 
 public class ConstantSp {
 
+    //public static final String BASE_URL = "http://192.168.1.47/InternshipOnline/";
+    public static final String BASE_URL = "https://internshipbrainybeam.000webhostapp.com/";
     public static final String PREF = "pref";
     public static final String ID = "id";
     public static final String USERNAME = "username";

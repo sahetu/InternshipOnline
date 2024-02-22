@@ -2,9 +2,11 @@ package internship.online;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,7 +21,11 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -225,7 +231,7 @@ public class SignupActivity extends AppCompatActivity {
                     new CommonMethod(SignupActivity.this,"Please Accept Terms & Conditions");
                 }
                 else{
-                    String selectQuery = "SELECT * FROM USERS WHERE USERNAME='"+username.getText().toString()+"' OR EMAIL='"+email.getText().toString()+"' OR CONTACT='"+contact.getText().toString()+"'";
+                    /*String selectQuery = "SELECT * FROM USERS WHERE USERNAME='"+username.getText().toString()+"' OR EMAIL='"+email.getText().toString()+"' OR CONTACT='"+contact.getText().toString()+"'";
                     Cursor cursor = sqlDb.rawQuery(selectQuery,null);
                     if(cursor.getCount()>0){
                         new CommonMethod(SignupActivity.this,"User Already Exists");
@@ -235,10 +241,62 @@ public class SignupActivity extends AppCompatActivity {
                         sqlDb.execSQL(insertQuery);
                         new CommonMethod(SignupActivity.this,"Signup Successfully");
                         onBackPressed();
+                    }*/
+                    if(new ConnectionDetector(SignupActivity.this).networkConnected()){
+                        //new CommonMethod(SignupActivity.this,"Internet/Wifi Connected");
+                        new insertAsync().execute();
+                    }
+                    else{
+                        new ConnectionDetector(SignupActivity.this).networkDisconnected();
                     }
                 }
             }
         });
 
+    }
+
+    private class insertAsync extends AsyncTask<String,String,String> {
+
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(SignupActivity.this);
+            pd.setMessage("Please Wait...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            HashMap<String,String> hashMap = new HashMap<>();
+            hashMap.put("username",username.getText().toString());
+            hashMap.put("name",name.getText().toString());
+            hashMap.put("email",email.getText().toString());
+            hashMap.put("contact",contact.getText().toString());
+            hashMap.put("password",password.getText().toString());
+            hashMap.put("gender",sGender);
+            hashMap.put("city",sCity);
+            return new MakeServiceCall().MakeServiceCall(ConstantSp.BASE_URL+"signup.php",MakeServiceCall.POST,hashMap);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            pd.dismiss();
+            try {
+                JSONObject object = new JSONObject(s);
+                if(object.getBoolean("Status")){
+                    new CommonMethod(SignupActivity.this,object.getString("Message"));
+                    onBackPressed();
+                }
+                else{
+                    new CommonMethod(SignupActivity.this,object.getString("Message"));
+                }
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
