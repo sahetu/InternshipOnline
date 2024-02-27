@@ -2,9 +2,11 @@ package internship.online;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,7 +20,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -204,19 +210,13 @@ public class ProfileActivity extends AppCompatActivity {
                     new CommonMethod(ProfileActivity.this,"Please Select City");
                 }
                 else{
-                    String updateQuery = "UPDATE USERS SET USERNAME='"+username.getText().toString()+"',NAME='"+name.getText().toString()+"',EMAIL='"+email.getText().toString()+"',CONTACT='"+contact.getText().toString()+"',PASSWORD='"+password.getText().toString()+"',GENDER='"+sGender+"',CITY='"+sCity+"' WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"'";
-                    sqlDb.execSQL(updateQuery);
-                    new CommonMethod(ProfileActivity.this,"Profile Update Successfully");
-
-                    sp.edit().putString(ConstantSp.USERNAME,username.getText().toString()).commit();
-                    sp.edit().putString(ConstantSp.NAME,name.getText().toString()).commit();
-                    sp.edit().putString(ConstantSp.EMAIL,email.getText().toString()).commit();
-                    sp.edit().putString(ConstantSp.CONTACT,contact.getText().toString()).commit();
-                    sp.edit().putString(ConstantSp.PASSWORD,password.getText().toString()).commit();
-                    sp.edit().putString(ConstantSp.GENDER,sGender).commit();
-                    sp.edit().putString(ConstantSp.CITY,sCity).commit();
-
-                    setData(false);
+                    //updateSqlite();
+                    if(new ConnectionDetector(ProfileActivity.this).networkConnected()){
+                        new updateAsync().execute();
+                    }
+                    else{
+                        new ConnectionDetector(ProfileActivity.this).networkDisconnected();
+                    }
                 }
             }
         });
@@ -230,6 +230,22 @@ public class ProfileActivity extends AppCompatActivity {
 
         setData(false);
 
+    }
+
+    private void updateSqlite() {
+        String updateQuery = "UPDATE USERS SET USERNAME='"+username.getText().toString()+"',NAME='"+name.getText().toString()+"',EMAIL='"+email.getText().toString()+"',CONTACT='"+contact.getText().toString()+"',PASSWORD='"+password.getText().toString()+"',GENDER='"+sGender+"',CITY='"+sCity+"' WHERE USERID='"+sp.getString(ConstantSp.ID,"")+"'";
+        sqlDb.execSQL(updateQuery);
+        new CommonMethod(ProfileActivity.this,"Profile Update Successfully");
+
+        sp.edit().putString(ConstantSp.USERNAME,username.getText().toString()).commit();
+        sp.edit().putString(ConstantSp.NAME,name.getText().toString()).commit();
+        sp.edit().putString(ConstantSp.EMAIL,email.getText().toString()).commit();
+        sp.edit().putString(ConstantSp.CONTACT,contact.getText().toString()).commit();
+        sp.edit().putString(ConstantSp.PASSWORD,password.getText().toString()).commit();
+        sp.edit().putString(ConstantSp.GENDER,sGender).commit();
+        sp.edit().putString(ConstantSp.CITY,sCity).commit();
+
+        setData(false);
     }
 
     private void setData(boolean b) {
@@ -289,5 +305,61 @@ public class ProfileActivity extends AppCompatActivity {
             submit.setVisibility(View.GONE);
         }
 
+    }
+
+    private class updateAsync extends AsyncTask<String,String,String> {
+
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(ProfileActivity.this);
+            pd.setMessage("Please Wait...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            HashMap<String,String> hashMap = new HashMap<>();
+            hashMap.put("userId",sp.getString(ConstantSp.ID,""));
+            hashMap.put("userName",username.getText().toString());
+            hashMap.put("name",name.getText().toString());
+            hashMap.put("email",email.getText().toString());
+            hashMap.put("contact",contact.getText().toString());
+            hashMap.put("password",password.getText().toString());
+            hashMap.put("gender",sGender);
+            hashMap.put("city",sCity);
+            return new MakeServiceCall().MakeServiceCall(ConstantSp.BASE_URL+"updateProfile.php",MakeServiceCall.POST,hashMap);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            pd.dismiss();
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                if(jsonObject.getBoolean("Status")){
+                    new CommonMethod(ProfileActivity.this,jsonObject.getString("Message"));
+
+                    sp.edit().putString(ConstantSp.USERNAME,username.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.NAME,name.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.EMAIL,email.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.CONTACT,contact.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.PASSWORD,password.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.GENDER,sGender).commit();
+                    sp.edit().putString(ConstantSp.CITY,sCity).commit();
+
+                    setData(false);
+
+                }
+                else{
+                    new CommonMethod(ProfileActivity.this,jsonObject.getString("Message"));
+                }
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
