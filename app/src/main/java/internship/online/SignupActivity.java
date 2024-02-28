@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,6 +27,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -46,10 +51,15 @@ public class SignupActivity extends AppCompatActivity {
     SQLiteDatabase sqlDb;
     String sCity = "";
 
+    ApiInterface apiInterface;
+    ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         sqlDb = openOrCreateDatabase("InternshipOn.db",MODE_PRIVATE,null);
         String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,USERNAME VARCHAR(50),NAME VARCHAR(50),EMAIL VARCHAR(50),CONTACT BIGINT(10),PASSWORD VARCHAR(12),GENDER VARCHAR(6),CITY VARCHAR(100))";
@@ -244,12 +254,56 @@ public class SignupActivity extends AppCompatActivity {
                     }*/
                     if(new ConnectionDetector(SignupActivity.this).networkConnected()){
                         //new CommonMethod(SignupActivity.this,"Internet/Wifi Connected");
-                        new insertAsync().execute();
+                        //new insertAsync().execute();
+                        pd = new ProgressDialog(SignupActivity.this);
+                        pd.setMessage("Please Wait...");
+                        pd.setCancelable(false);
+                        pd.show();
+                        doSignupRetrofit();
                     }
                     else{
                         new ConnectionDetector(SignupActivity.this).networkDisconnected();
                     }
                 }
+            }
+        });
+
+    }
+
+    private void doSignupRetrofit() {
+        Call<GetSignupData> call = apiInterface.getSignupData(
+                username.getText().toString(),
+                name.getText().toString(),
+                email.getText().toString(),
+                contact.getText().toString(),
+                password.getText().toString(),
+                sGender,
+                sCity
+        );
+
+        call.enqueue(new Callback<GetSignupData>() {
+            @Override
+            public void onResponse(Call<GetSignupData> call, Response<GetSignupData> response) {
+                pd.dismiss();
+                if(response.code() == 200){
+                    if(response.body().status){
+                        new CommonMethod(SignupActivity.this,response.body().message);
+                        onBackPressed();
+                    }
+                    else{
+                        new CommonMethod(SignupActivity.this,response.body().message);
+                    }
+                }
+                else{
+                    new CommonMethod(SignupActivity.this,"Server Error Code : "+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetSignupData> call, Throwable t) {
+                pd.dismiss();
+                new CommonMethod(SignupActivity.this,t.getMessage());
+                Log.d("RESPONSE",t.getMessage());
             }
         });
 
