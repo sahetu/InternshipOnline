@@ -17,6 +17,10 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DashboardActivity extends AppCompatActivity {
 
     TextView name;
@@ -24,10 +28,15 @@ public class DashboardActivity extends AppCompatActivity {
     SharedPreferences sp;
     SQLiteDatabase sqlDb;
 
+    ApiInterface apiInterface;
+    ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         sqlDb = openOrCreateDatabase("InternshipOn.db",MODE_PRIVATE,null);
         String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT,USERNAME VARCHAR(50),NAME VARCHAR(50),EMAIL VARCHAR(50),CONTACT BIGINT(10),PASSWORD VARCHAR(12),GENDER VARCHAR(6),CITY VARCHAR(100))";
@@ -86,7 +95,12 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //deleteSqlite();
                 if(new ConnectionDetector(DashboardActivity.this).networkConnected()){
-                    new deleteAsync().execute();
+                    //new deleteAsync().execute();
+                    pd = new ProgressDialog(DashboardActivity.this);
+                    pd.setMessage("Please Wait...");
+                    pd.setCancelable(false);
+                    pd.show();
+                    doDeleteRetrofit();
                 }
                 else{
                     new ConnectionDetector(DashboardActivity.this).networkDisconnected();
@@ -166,6 +180,37 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void doDeleteRetrofit() {
+        Call<GetSignupData> call = apiInterface.deleteProfileData(sp.getString(ConstantSp.ID,""));
+        call.enqueue(new Callback<GetSignupData>() {
+            @Override
+            public void onResponse(Call<GetSignupData> call, Response<GetSignupData> response) {
+                pd.dismiss();
+                if(response.code()==200){
+                    if(response.body().status){
+                        new CommonMethod(DashboardActivity.this,response.body().message);
+                        sp.edit().clear().commit();
+
+                        new CommonMethod(DashboardActivity.this, MainActivity.class);
+                        finish();
+                    }
+                    else{
+                        new CommonMethod(DashboardActivity.this,response.body().message);
+                    }
+                }
+                else{
+                    new CommonMethod(DashboardActivity.this,"Server Error Code : "+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetSignupData> call, Throwable t) {
+                pd.dismiss();
+                new CommonMethod(DashboardActivity.this,t.getMessage());
+            }
+        });
     }
 
     private void deleteSqlite() {
