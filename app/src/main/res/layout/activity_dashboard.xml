@@ -113,6 +113,13 @@
                 android:text="@string/current_location" />
 
             <Button
+                android:id="@+id/dashboard_razorpay"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/razorpay_demo" />
+
+            <Button
                 android:id="@+id/dashboard_logout"
                 style="@style/button_16"
                 android:layout_marginHorizontal="@dimen/_20sdp"

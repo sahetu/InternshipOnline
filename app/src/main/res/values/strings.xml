@@ -47,6 +47,8 @@
     <string name="bottom_nav">Bottom Navigation</string>
     <string name="current_location">Current Location</string>
 
+    <string name="razorpay_demo">Razorpay Gateway</string>
+
     <string name="title_activity_bottom_nav">BottomNavActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>

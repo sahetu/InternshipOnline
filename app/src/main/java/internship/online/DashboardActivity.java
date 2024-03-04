@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class DashboardActivity extends AppCompatActivity {
 
     TextView name;
-    Button logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler,activityFragment,tabDemo,navigationDrawer,bottomNav,currentLocation;
+    Button logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler,activityFragment,tabDemo,navigationDrawer,bottomNav,currentLocation,razorpayDemo;
     SharedPreferences sp;
     SQLiteDatabase sqlDb;
 
@@ -64,6 +64,14 @@ public class DashboardActivity extends AppCompatActivity {
                         sp.getString(ConstantSp.GENDER,"")+"\n"+
                         sp.getString(ConstantSp.CITY,"")
                 );
+
+        razorpayDemo = findViewById(R.id.dashboard_razorpay);
+        razorpayDemo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this, RazorpayDemoActivity.class);
+            }
+        });
 
         logout = findViewById(R.id.dashboard_logout);
         logout.setOnClickListener(new View.OnClickListener() {
