@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class DashboardActivity extends AppCompatActivity {
 
     TextView name;
-    Button logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler,activityFragment,tabDemo,navigationDrawer,bottomNav,currentLocation,razorpayDemo;
+    Button category,logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler,activityFragment,tabDemo,navigationDrawer,bottomNav,currentLocation,razorpayDemo;
     SharedPreferences sp;
     SQLiteDatabase sqlDb;
 
@@ -51,6 +51,14 @@ public class DashboardActivity extends AppCompatActivity {
         String sPassword = bundle.getString("PASSWORD");
 
         Log.d("RESPONSE",sEmail+"\n"+sPassword);*/
+
+        category = findViewById(R.id.dashboard_category);
+        category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this, CategoryActivity.class);
+            }
+        });
 
         name = findViewById(R.id.dashboard_name);
 

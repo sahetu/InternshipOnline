@@ -55,6 +55,14 @@ dependencies {
 
     //Payment Gateway
     implementation 'com.razorpay:checkout:1.6.33'
+    implementation 'androidx.activity:activity:1.8.0'
+
+    //Circle Imageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Multiple Image Selection
+    implementation 'io.github.sangcomz:fishbun:1.1.0'
+    implementation 'io.coil-kt:coil:0.11.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

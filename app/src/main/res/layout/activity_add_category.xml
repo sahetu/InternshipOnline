@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddCategoryActivity">
+
+    <FrameLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/add_category_image"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/icon"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="@dimen/_1sdp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/add_category_camera"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:src="@drawable/camera"
+            app:civ_border_color="@android:color/holo_red_dark"
+            app:civ_border_width="@dimen/_2sdp" />
+
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/add_category_name"
+        style="@style/edit_15"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="Category Name" />
+
+    <Button
+        android:id="@+id/add_category_submit"
+        style="@style/button_16"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Submit" />
+
+</LinearLayout>

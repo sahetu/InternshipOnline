@@ -36,6 +36,13 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/dashboard_category"
+                style="@style/button_16"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/category" />
+
+            <Button
                 android:id="@+id/dashboard_profile"
                 style="@style/button_16"
                 android:layout_marginHorizontal="@dimen/_20sdp"
