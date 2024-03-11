@@ -2,6 +2,7 @@ package internship.online;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,12 +32,19 @@ import androidx.core.view.WindowInsetsCompat;
 import com.sangcomz.fishbun.FishBun;
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddCategoryActivity extends AppCompatActivity {
 
@@ -53,10 +62,15 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     String sSelectedPath = "";
 
+    ApiInterface apiInterface;
+    ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
+
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         submit = findViewById(R.id.add_category_submit);
         imageView = findViewById(R.id.add_category_image);
@@ -69,6 +83,59 @@ public class AddCategoryActivity extends AppCompatActivity {
                 if (checkAndRequestPermission()) {
                     selectImageMethod();
                 }
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(category.getText().toString().trim().equals("")){
+                    category.setError("Category Name Required");
+                }
+                else if(sSelectedPath==null || sSelectedPath.equals("")){
+                    new CommonMethod(AddCategoryActivity.this,"Please Select Image");
+                }
+                else{
+                    pd = new ProgressDialog(AddCategoryActivity.this);
+                    pd.setMessage("Please Wait...");
+                    pd.setCancelable(false);
+                    pd.show();
+                    doImageUpload();
+                }
+            }
+        });
+
+    }
+
+    private void doImageUpload() {
+        RequestBody namePart = RequestBody.create(MultipartBody.FORM, category.getText().toString());
+
+        File file = new File(sSelectedPath);
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("catimage", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+
+        Call<GetSignupData> call = apiInterface.addCategoryData(namePart,filePart);
+        call.enqueue(new Callback<GetSignupData>() {
+            @Override
+            public void onResponse(Call<GetSignupData> call, Response<GetSignupData> response) {
+                pd.dismiss();
+                if(response.code()==200){
+                    if(response.body().status){
+                        new CommonMethod(AddCategoryActivity.this,response.body().message);
+                        onBackPressed();
+                    }
+                    else{
+                        new CommonMethod(AddCategoryActivity.this,response.body().message);
+                    }
+                }
+                else{
+                    new CommonMethod(AddCategoryActivity.this,"Server Error Code : "+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetSignupData> call, Throwable t) {
+                pd.dismiss();
+                new CommonMethod(AddCategoryActivity.this,t.getMessage());
             }
         });
     }
@@ -196,7 +263,9 @@ public class AddCategoryActivity extends AppCompatActivity {
         if(requestCode==REQUEST_CODE_CHOOSE){
             if(data!=null && resultCode==RESULT_OK){
                 List<Uri> mSelected = data.getParcelableArrayListExtra(FishBun.INTENT_PATH);
+                Log.d("RESPONSE_IMAGE_URI", String.valueOf(mSelected.get(0)));
                 sSelectedPath = getImage(mSelected.get(0));
+                Log.d("RESPONSE_IMAGE_PATH",sSelectedPath);
                 imageView.setImageURI(mSelected.get(0));
             }
             else{
