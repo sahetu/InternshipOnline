@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "908823568639",
+    "project_id": "internship-online",
+    "storage_bucket": "internship-online.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908823568639:android:0cec85a53901cd64aa2cca",
+        "android_client_info": {
+          "package_name": "internship.online"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGmHAYYEaOpwO69VVCMMEOnkt2K6qdjT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

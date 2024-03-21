@@ -23,4 +23,6 @@ public class ConstantSp {
     public static final String USER_DETAIL_GENDER = "ud_gender";
     public static final String USER_DETAIL_CITY = "ud_city";
 
+    public static final String FCM_ID = "fcm_id";
+
 }

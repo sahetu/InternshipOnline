@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class DashboardActivity extends AppCompatActivity {
 
     TextView name;
-    Button category,logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler,activityFragment,tabDemo,navigationDrawer,bottomNav,currentLocation,razorpayDemo;
+    Button category,logout,profile,deleteProfile,userList,userCustomList,userRecycler,amazonRecycler,activityFragment,tabDemo,navigationDrawer,bottomNav,currentLocation,razorpayDemo,notification;
     SharedPreferences sp;
     SQLiteDatabase sqlDb;
 
@@ -51,6 +51,14 @@ public class DashboardActivity extends AppCompatActivity {
         String sPassword = bundle.getString("PASSWORD");
 
         Log.d("RESPONSE",sEmail+"\n"+sPassword);*/
+
+        notification = findViewById(R.id.dashboard_notification);
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CommonMethod(DashboardActivity.this,NotificationActivity.class);
+            }
+        });
 
         category = findViewById(R.id.dashboard_category);
         category.setOnClickListener(new View.OnClickListener() {
@@ -196,6 +204,38 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        if(new ConnectionDetector(DashboardActivity.this).networkConnected()){
+            updateFcm();
+        }
+        else{
+            new ConnectionDetector(DashboardActivity.this).networkDisconnected();
+        }
+
+    }
+
+    private void updateFcm() {
+        Call<GetSignupData> call = apiInterface.updateFcmData(sp.getString(ConstantSp.ID,""),sp.getString(ConstantSp.FCM_ID,""));
+        call.enqueue(new Callback<GetSignupData>() {
+            @Override
+            public void onResponse(Call<GetSignupData> call, Response<GetSignupData> response) {
+                if(response.code()==200){
+                    if(response.body().status){
+                        Log.d("RESPONSE_TOKEN",response.body().message);
+                    }
+                    else{
+                        Log.d("RESPONSE_TOKEN",response.body().message);
+                    }
+                }
+                else{
+                    Log.d("RESPONSE_TOKEN","Server Error Code : "+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetSignupData> call, Throwable t) {
+                Log.d("RESPONSE_TOKEN",t.getMessage());
+            }
+        });
     }
 
     private void doDeleteRetrofit() {
